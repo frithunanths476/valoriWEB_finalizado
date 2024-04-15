@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valori</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href='./style.css'>
+    <style>
+        body {
+            background-color: #33404F;
+            min-height: 100vh;
+            overflow-x: hidden;
+            margin: 0;
+            font-family: "Inter", sans-serif;
+        }
+        .direita img{
+            width: 40vw;
+            height: 40vw;
+        }
+        .direita{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        @keyframes float{
+	    0%,100%{
+		transform:translatey(0)
+	    }
+	    50%{
+		transform:translatey(-30px)
+	    }
+}
+        .direita {
+        animation: float 4s ease-in-out infinite;
+}
+        .esquerda{
+            margin-left: 4vw;
+            margin-top: 4vw;
+        }
+        .esquerda-div img{
+            width: 15vw;
+        }
+        .titulo-h1{
+            color: white;
+            font-size: 3.5vw;
+            font-weight: 900;
+            margin: 0
+        }
+        .arruma{
+            display: flex;
+            justify-content: center;
+        }
+        .arruma2{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        .porcoVerde{
+            width: 35vw;
+            border: 1px solid #5BB5A2;
+            padding: 2vw;
+            border-radius: 2vw;
+            -webkit-box-shadow: 1px 1px 54px 0px rgba(91,181,162,0.6);
+            -moz-box-shadow: 1px 1px 54px 0px rgba(91,181,162,0.6);
+            box-shadow: 1px 1px 54px 0px rgba(91,181,162,0.6);
+            cursor: pointer;
+            transition: 1s;
+        }
+        .porcoVerde:hover,
+        .porcoVermelho:hover{
+            transform: scale(1.03);
+            transition: 1s;
+        }
+        .porcoVermelho{
+            width: 35vw;
+            border: 1px solid #FF0000;
+            padding: 2vw;
+            border-radius: 2vw;
+            -webkit-box-shadow: 1px 1px 54px 0px rgba(255,0,47,0.4);
+            -moz-box-shadow: 1px 1px 54px 0px rgba(255,0,47,0.4);
+            box-shadow: 1px 1px 54px 0px rgba(255,0,47,0.4);
+            cursor: pointer;
+            transition: 1s;
+        }
+        .titulo3{
+            color: #33404F;
+            font-size: 2.5vw;
+            margin: 0;
+            margin-bottom: 0.5vw;
+        }
+        .extrato-div{
+            display: grid;
+            grid-template-columns: 1fr 5fr 2fr;
+            align-items: center;
+            margin-bottom: 3vw;
+            margin-top: 2vw;
+            gap: 2vw
+        }
+        .extrato-div img{
+            width: 7vw;
+        }
+        .subtitulo2{
+            color: #b0aeae;
+            font-size: 2vw;
+            margin: 0;
+        }
+        .titulo-h4{
+            font-size: 4.5vw;
+            color: #33404F;
+            font-weight: bolder;
+            margin: 0;
+        }
+        .titulo {
+            font-size: 2.8vw;
+            color: #33404F;
+        }
+        .fundo{
+            padding: 2vw;
+            background-color: #5BB5A2;
+            width: fit-content;
+            border-radius: 50%;
+            margin-bottom: 2.5vw;
+        }
+        .fundo2{
+            padding: 2vw;
+            background-color: #FF0000;
+            width: fit-content;
+            border-radius: 50%;
+            margin-bottom: 2.5vw;
+        }
+        .fundo img{
+            width: 5.5vw;
+            height: 5vw;
+        }
+        .fundo2 img{
+            width: 5.5vw;
+            height: 4.5vw;
+        }
+        main{
+            background-color: white;
+            min-height: 100vh;
+            border-radius: 7vw 7vw 0 0;
+            display: flex;
+            justify-content: center;
+        }
+        .subtitulo{
+            color: white;
+            font-size: 2vw;
+            font-weight: 400;
+        }
+        .receita_despesa{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        .barraverde{
+            width: 20vw;
+            background-color: #00DDA3;
+            border-radius: 2vw;
+            height: 1vw;
+            margin-top: 1.8vw;
+        }
+        .barraverde2 {
+            width: 30vw;
+            border-radius: 2vw;
+            height: 1vw;
+            margin-top: 1.8vw;
+            background-color: #00DDA3; /* Cor verde para saldo positivo */
+        }
+        .barraverde3 {
+            width: 30vw;
+            border-radius: 2vw;
+            height: 1vw;
+            margin-top: 1.8vw;
+            background-color: gray;
+        }
+
+        .barravermelha2 {
+            width: 30vw;
+            border-radius: 2vw;
+            height: 1vw;
+            margin-top: 1.8vw;
+            background-color: #E84209; /* Cor vermelha para saldo negativo */
+        }
+
+        .barravermelha{
+            width: 20vw;
+            background-color: #E84209;
+            border-radius: 2vw;
+            height: 1vw;
+            margin-top: 1.8vw;
+        }
+        .esquerda-div{
+            display: grid;
+            grid-template-rows: 0.8fr 1.2fr 2.2fr;
+            height: 100vh;
+        }
+        .tudotopo{
+            background-image: url(/Group.png);
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            display: grid;
+            grid-template-columns: 1.25fr 1fr;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #ccc;
+            padding: 10px;
+        }
+        .titulo {
+            flex-basis: 40%;
+            text-align: left;
+        }
+        .autor {
+            flex-basis: 40%;
+            text-align: left;
+        }
+        .ano_publicacao {
+            flex-basis: 10%;
+            text-align: right;
+        }
+        body::-webkit-scrollbar {
+            width: 15px;
+        }
+
+        body::-webkit-scrollbar-track {
+          background: white;
+        }
+
+        body::-webkit-scrollbar-thumb {
+          background-color: #33404F;
+          border-radius: 20px;
+          border: 3px solid white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="tudotopo">
+            <div class="esquerda">
+                <div class="esquerda-div">
+
+                    <form action="/logout" method="post">
+                        <button type="submit" style="background-color: #33404F; border: none; cursor: pointer"><img src="{{ url_for('static', filename='logo.png') }}" alt=""></button>
+                    </form>
+
+
+
+                    <div  style="margin-top: 2vw;">
+                        <h1 class="titulo-h1">Olá, seja bem-vindo</h1>
+                        <h3 class="subtitulo">Gerencie aqui suas finanças</h3>
+                    </div>
+                    <div class="receita_despesa">
+                        <div class="partes">
+                            <div>
+                                <h3 class="subtitulo">Receita</h3>
+                                <h4 class="titulo-h1">R$ {{receita|round(2)}}</h4>
+                                <div class="barraverde"></div>
+                            </div>
+                        </div>
+                        <div class="partes">
+                            <div>
+                                <h3 class="subtitulo">Despesa</h3>
+                                <h4 class="titulo-h1">R$ {{despesa|round(2)}}</h4>
+                                <div class="barravermelha"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="direita">
+                <img src="{{ url_for('static', filename='Group 31.png') }}" alt="">
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div style="width: 85vw; margin-top: 5vw;">
+            <div class="saldo">
+                <h4 class="titulo">Saldo</h4>
+                <div class="arruma">
+                    <div style="display: grid; justify-items: center;">
+                        <h4 class="titulo-h4">R$ {{total|round(2)}}</h4>
+                        <div class="{% if total > 0 %}barraverde2{% elif total == 0 %}barraverde3{% else %}barravermelha2{% endif %}"></div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="atividades">
+                <h4 class="titulo">Atividades</h4>
+                <div class="arruma2">
+                    <div class="porcoVerde">
+                        <div class="fundo"><a href="{{ url_for('receita') }}"><img src="{{ url_for('static', filename='piggy-bank-solid 1.png') }}" alt=""></a></div>
+                        <h5 style="color: #33404F; font-size: 2vw; margin: 0; font-weight: 600;">Receitas</h5>
+                    </div>
+                    <div class="porcoVermelho">
+                        <div class="fundo2"><a href="{{ url_for('despesa') }}"><img src="{{ url_for('static', filename='pigb 1.png') }}" alt=""></a></div>
+                        <h5  style="color: #33404F; font-size: 2vw; margin: 0; font-weight: 600;">Despesas</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="extrato">
+                <h4 class="titulo">Extrato</h4>
+                <div class="extrato-div">
+                    {% for receita in receitaUnit %}
+                        <img src="{{ url_for('static', filename='Group 32.png') }}" alt="">
+                        <div>
+                            <h4 class="titulo3">{{ receita['nome_receita'] }}</h4>
+                            <h5 class="subtitulo2">{{ receita['descricao'] }}</h5>
+                        </div>
+                        <div style="display: grid; justify-items: center;">
+                            <div>
+                                <h4 class="titulo3">R$ {{ receita['valor']|round(2) }}</h4>
+                                <h5 class="subtitulo2">{{ receita['data_emissao'] }}</h5>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {% for despesa in despesaUnit %}
+                        <img src="{{ url_for('static', filename='Group 23.png') }}" alt="">
+                        <div>
+                            <h4 class="titulo3">{{ despesa['nome_despesa'] }}</h4>
+                            <h5 class="subtitulo2">{{ despesa['descricao'] }}</h5>
+                        </div>
+                        <div style="display: grid; justify-items: center;">
+                            <div>
+                                <h4 class="titulo3">R$ -{{ despesa['valor']|round(2) }}</h4>
+                                <h5 class="subtitulo2">{{ despesa['data_emissao'] }}</h5>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+</body>
+</html>
