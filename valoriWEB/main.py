@@ -9,6 +9,7 @@ app.config['SECRET_KEY'] = 'sua_chave_secreta_aqui'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root@localhost/valori'
 db = SQLAlchemy(app)
 
+
 class Despesa(db.Model):
     id_despesa = db.Column(db.Integer, primary_key=True, autoincrement=True)
     data_emissao = db.Column(db.Date)
@@ -17,6 +18,7 @@ class Despesa(db.Model):
     nome_despesa = db.Column(db.String(256))
     id_usuario = db.Column(db.Integer, ForeignKey('usuario.id_usuario'))
     usuario = relationship("Usuario", back_populates="despesas")
+
 
 class Receita(db.Model):
     id_receita = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -27,6 +29,7 @@ class Receita(db.Model):
     id_usuario = db.Column(db.Integer, ForeignKey('usuario.id_usuario'))
     usuario = relationship("Usuario", back_populates="receitas")
 
+
 class Usuario(db.Model):
     id_usuario = db.Column(db.Integer, primary_key=True, autoincrement=True)
     nome = db.Column(db.String(100))
@@ -34,6 +37,7 @@ class Usuario(db.Model):
     senha = db.Column(db.String(50))
     despesas = relationship("Despesa", back_populates="usuario")
     receitas = relationship("Receita", back_populates="usuario")
+
 
 @app.route('/main')
 def index():
@@ -46,12 +50,13 @@ def index():
 
         despesas = db.session.query(Despesa).filter_by(id_usuario=id_usuario).all()
 
-        total_receita = db.session.query(func.coalesce(func.sum(Receita.valor), 0)).filter_by(id_usuario=id_usuario).scalar()
+        total_receita = (db.session.query(func.coalesce(func.sum(Receita.valor), 0)).filter_by(id_usuario=id_usuario).
+                         scalar())
 
-        total_despesa = db.session.query(func.coalesce(func.sum(Despesa.valor), 0)).filter_by(id_usuario=id_usuario).scalar()
+        total_despesa = (db.session.query(func.coalesce(func.sum(Despesa.valor), 0)).filter_by(id_usuario=id_usuario).
+                         scalar())
 
         total = total_receita - total_despesa
-
 
         return render_template('index.html', outro=valori,
                                receitaUnit=receitas,
@@ -62,9 +67,11 @@ def index():
     else:
         return render_template('login.html')
 
+
 @app.route('/cadastro')
 def cadastro():
     return render_template('cadastro.html')
+
 
 @app.route('/criar', methods=['POST'])
 def criar():
@@ -81,21 +88,21 @@ def criar():
         novo_usuario = Usuario(nome=nome, email=email, senha=senha_hash)
         db.session.add(novo_usuario)
         db.session.commit()
-        flash('Usuário cadastrado com sucesso', 'success')
         return redirect(url_for('login_form'))
+
 
 @app.route('/')
 def login_form():
-    return  render_template('login.html')
+    return render_template('login.html')
+
 
 @app.route('/login', methods=['POST'])
 def login_post():
     email = request.form.get('email')
-    senha = request.form.get('senha')
+    senha_form = request.form.get('senha')
 
     user = Usuario.query.filter_by(email=email).first()
-    senha = check_password_hash(user.senha, senha)
-    if user and senha:
+    if user and check_password_hash(user.senha, senha_form):
         session['user_id'] = user.id_usuario
         if 'next' in session:
             next_route = session.pop('next')
@@ -103,7 +110,8 @@ def login_post():
         return redirect(url_for('index'))
     else:
         flash('Email ou senha incorretos', 'error')
-        return redirect(url_for('login.html'))
+        return redirect(url_for('login_form'))
+
 
 @app.route('/logout', methods=['POST'])
 def logout():
@@ -112,13 +120,14 @@ def logout():
     # Redirecione para a página inicial ou outra página após o logout
     return redirect(url_for('login_form'))
 
+
 @app.route('/despesa')
 def despesa():
-
     if 'user_id' in session:
         return render_template('despesa.html')
     else:
         return render_template('login.html')
+
 
 @app.route('/adicionar_despesa', methods=['POST'])
 def despesa_post():
@@ -147,12 +156,14 @@ def despesa_post():
         flash('Despesa inserida com sucesso', 'success')
         return redirect(url_for('index'))
 
+
 @app.route('/receita')
 def receita():
     if 'user_id' in session:
         return render_template('receita.html')
     else:
         return render_template('login.html')
+
 
 @app.route('/adicionar_receita', methods=['POST'])
 def receita_post():
@@ -181,6 +192,7 @@ def receita_post():
         db.session.commit()
         flash('Receita inserida com sucesso', 'success')
         return redirect(url_for('index'))
+
 
 if __name__ == '__main__':
     app.run(debug=True)

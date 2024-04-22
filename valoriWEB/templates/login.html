@@ -55,7 +55,7 @@
         }
         p {
             text-align: center;
-            margin-top: 2vw;
+            margin-top: 1vw;
             margin-bottom: 0vw;
             color: #33404F;
             font-size: 1.5vw;
@@ -72,7 +72,7 @@
             height: 8vw;
             padding: 2vw;
             border-radius: 26vw;
-            margin-top: -15vw;
+            margin-top: -8vw;
             background-color: white;
             box-shadow: 0px 4px 11px 4px rgba(0,0,0,0.1);
         }
@@ -89,6 +89,12 @@
           border-radius: 20px;
           border: 3px solid white;
         }
+        .alert{
+            font-size: 1.5vw;
+            margin-top: 1vw;
+            color: red;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
@@ -102,6 +108,15 @@
         <input type="text" name="email" placeholder="Email" required><br>
         <input type="password" name="senha" placeholder="Senha" required><br>
         <input type="submit" value="Login">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
     </form>
     <p>Não tem uma conta? <a href="{{ url_for('cadastro') }}">Cadastre-se</a></p>
 </div>
